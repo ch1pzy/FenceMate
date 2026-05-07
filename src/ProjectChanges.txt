@@ -1,0 +1,132 @@
+1. (maybe, cause this may lose the tracking of the stepper positions) Convert Stepping code to standard stepper driver library
+2. Reconfigure 2 Fence Motors from leadscrew driven to rack and gear drive
+3. Include 2 more stepper motors which move the table saw extension wing and allow for supporting larger cuts and holding the fence for those larger cuts
+    * Extension wing will be leadscrew driven.8mm leadscrew, 2mm Pitch, 4mm Lead
+    * Need to define a framework for when to move the fence alone vs, when to locate the fence on the extension wing first, then move the extension wing the relative distance to achieve the the desired cut width
+     i.e. All Cut width's upto point X, simply move the fence alone
+          All Cut width's beyond point x, the fence moves to point X then the wing is extended the remaining distance required (calculated)
+4. Adapt the touchscreen user interface to an i2c oled SH1106 with a rotary encoder that includes a push button on the encoder and a seperate back and confirm button
+    * rather than supporting both imperial and metric measurements. metric only would be preferred 
+
+5. Change board to arduino mega 2560 (1280)
+6. add homing routine to zero all axis's automatically (each stepper will have a dedicated optical endstop) and will also tram the fence and extension wing to ensure they are running parallel
+
+* add offset facility for fence and wing, simi;lar to 3d printer's Z offset, to have babystep'd ability to under/over drive the axis for calibration,
+  in a similar vien to the skew between the front to rear motors
+* Double check that the skewíng of the fence & wing have been captured as part of the migration/upgrade
+  # skew is basically the diff between front - reasr offset"
+* Change Homing Strategy, so the fence homes outwards @ the end of it's travel (max position) not @ the blade.
+  The wing will home at it's root however, (@ it's min travel)
+
+## Future Idea, have a bunch of memory preset entries, that you can quickly save the table's current postion info too, so if you need to jump between a few different cut's, you can then very easily resume the same width of cut later on in a project.
+
+
+4 endstop pins
+8 stepper pins (plus Enable = 12)
+2 i2c pins
+5 pins for encoder and buttons
+
+
+
+Stepper Drivers: 
+Stepper X               Fence Front
+X-Dir:      77 PA1
+X-Step:     75 PA3
+X-Enable:   73 PA5
+Stepper Y               Wing Front
+Y-Dir:      57 PC4
+Y-Step:     59 PC6
+Y-Enable:   71 PA7
+Stepper Z               Fence Rear
+Z-Dir:      70 PC2
+Z-Step:     53 PC1
+Z-Enable:   55 PC3
+Stepper E               Wing Rear
+E0-Dir:     39 PL4
+E0-Step:    41 PL6
+E0-Enable:  51 PC0
+Stepper A
+A-Dir:      37 PL2
+A-Step:     35 PL0
+A-Enable:   36 PL1
+
+Endstops: 
+X-Min:      78 PA0
+Y-Min:      74 PA4
+Z-Min:      60 PC7
+X-Max:      76 PA2
+Y-Max:      72 PA6
+Z-Max:      58 PC5
+
+Heaters & Fans: 
+HEATER0/Extruder0: 10 (PWM)
+HEATER1/Extruder1: 9 (PWM)
+HEATER_BED: 8 (PWM)
+Fan: 7 (PWM)
+
+Thermistors: 
+TEMP0/Extruder0: A13
+TEMP1/Extruder1: A15
+TEMP_BED: A14
+
+Endstops:
+X-Min/Max: 22/24
+Y-Min/Max: 26/28
+Z-Min/Max: 30/32
+
+Temperature:
+Extruder 1/2: 13/14 (Analog)
+Hotbed: 15 (Analog)
+Heaters:
+Hotend 1/2: 10/9
+Hotbed: 8
+Fans:
+FAN1/2/3: 7/6/11 (PWM) 
+
+
+LCD & SD Card: Uses standard RepRapDiscount Smart Controller interface pins (often SPI, EXP1/EXP2).
+PIN 5 7 SDA SCL
+
+rs_pin:         PD1 SDA
+e_pin:          PH0
+d4_pin:         PH1
+d5_pin:         PD0 SCL
+d6_pin:         PE3
+d7_pin:         PH3
+encoder_pins:   ^PL7, 
+                ^PG1
+click_pin:      ^!PD2
+
+    [display]
+lcd_type = hd44780
+rs_pin = ar20
+e_pin = ar17 PC3
+d4_pin = ar16 PC2
+d5_pin = ar21
+d6_pin = ar5 PD5
+d7_pin = ar6 PD6
+encoder_pins = ^ar42 , ^ar40
+click_pin = ^!ar19 PC5
+
+EXP1 Header Pinout (LCD Connections)
+Pin 1: LCD_P4 (D31)
+Pin 2: LCD_P3 (D33)
+Pin 3: LCD_P2 (D35)
+Pin 4: LCD_P1 (D37)
+Pin 5: LCD_P5 (D39)
+Pin 6: LCD_P6 (D41)
+Pin 7: LCD_P7 (D43)
+Pin 8: LCD_P8 (D45)
+Pin 9: GND
+Pin 10: 5V 
+EXP2 Header Pinout (SD Card/Encoder)
+Pin 1: SD_MISO (D50)
+Pin 2: SCK (D52)
+Pin 3: MOSI (D51)
+Pin 4: SD_CS (D53)
+Pin 5: SD_DETECT (D49)
+Pin 6: ENCODER_B (D31)
+Pin 7: ENC_BUTTON (D41)
+Pin 8: ENCODER_A (D33)
+Pin 9: No Conn
+Pin 10: No Conn
