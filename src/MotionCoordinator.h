@@ -30,6 +30,10 @@ public:
     // Checks if the system is currently executing a move
     bool isMoving() const;
 
+    // Direct access for live skew baby-stepping from the UI
+    void skewFence(float deltaMm);
+    void skewWing(float deltaMm);
+
 private:
     MotorPair& _fence;
     MotorPair& _wing;

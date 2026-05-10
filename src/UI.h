@@ -44,15 +44,27 @@ private:
         VIEW_BOOT_PROMPT,
         VIEW_HOME,
         VIEW_MENU_MAIN,
-        VIEW_MENU_SPEEDS,
         VIEW_MENU_OFFSETS,
+        VIEW_EDIT_OFFSET,
+        VIEW_EDIT_SKEW,
         VIEW_MENU_PRESETS,
+        VIEW_PRESET_ACTION,
+        VIEW_MENU_SPEEDS,
+        VIEW_EDIT_SPEED,
         VIEW_HOMING_ACTIVE
     };
 
     ViewState _currentView;
     float _targetInput;
     uint32_t _lastDrawMs;
+
+    // Menu Navigation State
+    uint8_t _menuIndex;
+    uint8_t _menuScrollTop;
+    uint8_t _selectedSlot;
+    uint8_t _editMode;
+    float   _editValueFloat;
+    int     _editValueInt;
 
     // Button states
     bool _btnBackPrev;
@@ -68,13 +80,18 @@ private:
     void drawHome();
     void drawMenuMain();
     void drawMenuSpeeds();
+    void drawEditSpeed();
     void drawMenuOffsets();
+    void drawEditOffset();
+    void drawEditSkew();
     void drawMenuPresets();
+    void drawPresetAction();
     void drawHomingActive();
+
+    // Utility for scrolling lists
+    void drawMenuStr(uint8_t y, bool isSelected, const char* text);
 
     // Input handlers
     void handleInputs();
-    void handleBootPromptInputs();
-    void handleHomeInputs();
-    void handleMenuMainInputs();
+    void handleEncoderMenuScroll(int maxIndex);
 };

@@ -92,3 +92,11 @@ float MotionCoordinator::getCurrentWidth() const {
 bool MotionCoordinator::isMoving() const {
     return _state != IDLE;
 }
+
+void MotionCoordinator::skewFence(float deltaMm) {
+    _fence.skewFront(deltaMm);
+}
+
+void MotionCoordinator::skewWing(float deltaMm) {
+    _wing.skewFront(deltaMm);
+}
