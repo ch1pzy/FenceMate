@@ -8,42 +8,42 @@
 
 // ── Stepper Pins (GT2560 Rev A) ───────────────────────────────────────────────
 // Fence uses X (front) and Z (rear) driver slots
-#define FENCE_FRONT_STEP     25
-#define FENCE_FRONT_DIR      23
-#define FENCE_FRONT_ENABLE   27
+#define FENCE_FRONT_STEP     25      //75
+#define FENCE_FRONT_DIR      23      //77
+#define FENCE_FRONT_ENABLE   27      //73
 
-#define FENCE_REAR_STEP      37
-#define FENCE_REAR_DIR       39
-#define FENCE_REAR_ENABLE    35
+#define FENCE_REAR_STEP      37     //53
+#define FENCE_REAR_DIR       39     //70
+#define FENCE_REAR_ENABLE    35     //55
 
 // Wing uses Y (front) and E0 (rear) driver slots
-#define WING_FRONT_STEP      31
-#define WING_FRONT_DIR       33
-#define WING_FRONT_ENABLE    29
+#define WING_FRONT_STEP      31     //59
+#define WING_FRONT_DIR       33     //57
+#define WING_FRONT_ENABLE    29     //71
 
-#define WING_REAR_STEP       43
-#define WING_REAR_DIR        45
-#define WING_REAR_ENABLE     41
+#define WING_REAR_STEP       43     //41
+#define WING_REAR_DIR        45     //39
+#define WING_REAR_ENABLE     41     //51
 
 // ── Endstop Pins (optical, LOW = triggered) ───────────────────────────────────
 // Fence homes OUTWARD (max travel, away from blade) → X-MAX, Z-MAX
-#define FENCE_FRONT_ENDSTOP  24   // X-MAX
-#define FENCE_REAR_ENDSTOP   32   // Z-MAX
+#define FENCE_FRONT_ENDSTOP  24   // X-MAX  76
+#define FENCE_REAR_ENDSTOP   32   // Z-MAX  58
 
 // Wing homes INWARD (retracted / root position) → Y-MIN, Y-MAX
-#define WING_FRONT_ENDSTOP   26   // Y-MIN
-#define WING_REAR_ENDSTOP    28   // Y-MAX
+#define WING_FRONT_ENDSTOP   26   // Y-MIN  74
+#define WING_REAR_ENDSTOP    28   // Y-MAX  72
 
 // Spare endstop pins (available for safety limit switches later)
 // X-MIN = 22,  Z-MIN = 30
 
 // ── Encoder & Buttons ─────────────────────────────────────────────────────────
-#define ENC_CLK       2   // Rotary encoder CLK — INT0 (interrupt-capable)
-#define ENC_DT        3   // Rotary encoder DT  — INT1 (interrupt-capable)
-#define ENC_SW        4   // Rotary encoder push button
-#define BTN_BACK      5   // Back / cancel button
-#define BTN_CONFIRM   6   // Confirm / execute button
-
+#define ENC_CLK       50 //2   // Rotary encoder CLK — INT0 (interrupt-capable)
+#define ENC_DT        52 //3   // Rotary encoder DT  — INT1 (interrupt-capable)
+#define ENC_SW        42 //4   // Rotary encoder push button
+#define BTN_BACK      12 //5   // Back / cancel button
+#define BTN_CONFIRM   13 //6   // Confirm / execute button
+ 
 // I²C: SDA = pin 20, SCL = pin 21  (hardware I²C, Wire handles automatically)
 
 // ── Motor Enable Polarity ─────────────────────────────────────────────────────
