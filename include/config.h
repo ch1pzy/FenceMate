@@ -95,4 +95,4 @@
 #define PRESET_SLOT_SIZE      8    // bytes: 4B fence pos + 4B wing pos
 
 // ── Debug ─────────────────────────────────────────────────────────────────────
-// #define DEBUG_SERIAL            // Uncomment to enable serial debug output
+#define DEBUG_SERIAL            // Uncomment to enable serial debug output

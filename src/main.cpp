@@ -29,16 +29,6 @@ MotorPair wing(
 MotionCoordinator coordinator(fence, wing);
 UIManager ui(coordinator);
 
-// ── Interrupt Service Routine for Rotary Encoder ─────────────────────────────
-void encoderISR() {
-    ui.tickEncoder();
-}
-
-// ISR for Pin Change Interrupt Group 0 (Port B: covers pins 50 and 52)
-ISR(PCINT0_vect) {
-    encoderISR();
-}
-
 // ── Setup ────────────────────────────────────────────────────────────────────
 void setup() {
     #ifdef DEBUG_SERIAL
@@ -61,10 +51,6 @@ void setup() {
     // Initialize OLED and UI
     ui.begin();
 
-    // Configure Pin Change Interrupts for encoder (Pins 50 & 52 are PB3 & PB1)
-    PCICR |= (1 << PCIE0);                     // Enable Pin Change Interrupt 0 (Port B)
-    PCMSK0 |= (1 << PCINT1) | (1 << PCINT3);   // Enable interrupts on PB1 (pin 52) & PB3 (pin 50)
-
     // Show Boot Prompt
     ui.showBootPrompt();
 }
@@ -74,6 +60,9 @@ bool _isHoming = false;
 
 // ── Main Loop ────────────────────────────────────────────────────────────────
 void loop() {
+    // Poll the rotary encoder as fast as possible (allows using non-interrupt pins like 50/52)
+    ui.tickEncoder();
+
     // 1. Update UI and handle inputs
     ui.update();
 
