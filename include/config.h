@@ -38,11 +38,11 @@
 // X-MIN = 22,  Z-MIN = 30
 
 // ── Encoder & Buttons ─────────────────────────────────────────────────────────
-#define ENC_CLK       50 //2   // Rotary encoder CLK — INT0 (interrupt-capable)
-#define ENC_DT        52 //3   // Rotary encoder DT  — INT1 (interrupt-capable)
-#define ENC_SW        42 //4   // Rotary encoder push button
-#define BTN_BACK      12 //5   // Back / cancel button
-#define BTN_CONFIRM   13 //6   // Confirm / execute button
+#define ENC_CLK       40 //2   // Rotary encoder CLK — INT0 (interrupt-capable)
+#define ENC_DT        42 //3   // Rotary encoder DT  — INT1 (interrupt-capable)
+#define ENC_SW        19 // 35 //42 //4   // Rotary encoder push button
+#define BTN_BACK      17 //< probably correct //5   // Back / cancel button
+#define BTN_CONFIRM   16 //< probably correct //6   // Confirm / execute button
  
 // I²C: SDA = pin 20, SCL = pin 21  (hardware I²C, Wire handles automatically)
 
